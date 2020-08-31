@@ -17,7 +17,7 @@ sudo apt install \
 	fluid-soundfont-gs \
 	icoutils \
 	wine-stable \
-	wine-tricks \
+	winetricks \
 	printer-driver-cups-pdf \
 
 #

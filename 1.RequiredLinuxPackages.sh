@@ -19,6 +19,7 @@ sudo apt install \
 	wine-stable \
 	winetricks \
 	printer-driver-cups-pdf \
+	imagemagick
 
 #
 # timidity-daemon is not functional, remove it now 

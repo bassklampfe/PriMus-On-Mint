@@ -98,7 +98,8 @@ Name=PriMus!
 chmod +x /tmp/columbussoft-primus.desktop
 xdg-desktop-menu install --mode user /tmp/columbussoft-primus.desktop
 
-cp /tmp/columbussoft-primus.desktop /home/test/Desktop/	
+DESKTOP=$(xdg-user-dir DESKTOP)
+cp /tmp/columbussoft-primus.desktop ${DESKTOP}/
 if [ -f ~/license.dat ] ; then cp ~/license.dat "${WINEPREFIX}/drive_c/Program Files (x86)/PriMus/" ; fi
 
 find ~/.local -iname "*primus*"

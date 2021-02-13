@@ -66,9 +66,11 @@ Encoding=UTF-8
 Type=Application
 Name=Timidity
 Comment=
-Exec=/usr/bin/timidity --output-24bit -A120 -iA --buffer-fragments=2,8 &
-OnlyShowIn=XFCE;
+Exec=/usr/bin/timidity --output-16bit -A70 -iA --buffer-fragments=2,8 --background
 StartupNotify=false
 Terminal=false
 Hidden=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=0
 -EOF-
+chmod +x ${HOME}/.config/autostart/Timidity.desktop

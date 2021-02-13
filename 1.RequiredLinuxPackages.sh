@@ -15,6 +15,7 @@ sudo apt install \
 	timidity \
 	fluid-soundfont-gm \
 	fluid-soundfont-gs \
+	lame \
 	icoutils \
 	wine-stable \
 	winetricks \

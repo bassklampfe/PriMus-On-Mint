@@ -9,5 +9,5 @@ set -e
 export WINEPREFIX="${HOME}/.wine-primus"
 rm -rf "${WINEPREFIX}"
 # setup wine environment (will recreate dir)
-winetricks corefonts gdiplus
+winetricks corefonts gdiplus vcrun2005
 

@@ -10,6 +10,7 @@ set -e
 # install required packages
 #
 sudo apt install \
+	zenity \
 	wget \
 	unrar \
 	timidity \
@@ -61,6 +62,7 @@ sudo usermod -a -G audio "${USER}"
 #
 # create an autostart entry to get timidity run when user logs in
 #
+mkdir -p ${HOME}/.config/autostart
 cat  << -EOF- > "${HOME}/.config/autostart/Timidity.desktop"
 [Desktop Entry]
 Encoding=UTF-8

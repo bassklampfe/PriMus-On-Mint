@@ -38,3 +38,32 @@ Quote=double
 fi
 
  
+#--------------------------------------------------
+# install actions for dolphin
+#--------------------------------------------------
+if  [ -f /usr/bin/dolphin ]
+then
+	mkdir -p "$HOME/.local/share/kservices5/ServiceMenus"
+	
+cat  << -EOF- > "${HOME}/.local/share/kservices5/ServiceMenus/Primus.desktop"
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/columbussoft-primus-pridoc;
+Actions=primus2mp3;primus2pdf;
+Icon=columbussoft-primus
+Encoding=UTF-8
+
+[Desktop Action primus2mp3]
+Name=Convert primus to MP3
+Exec=${HOME}/bin/primus2mp3.sh %F
+Icon=audio-mpeg
+
+[Desktop Action primus2pdf]
+Name=Convert primus to PDF
+Exec=${HOME}/bin/primus2pdf.sh %F
+Icon=application-pdf
+-EOF-
+
+
+fi

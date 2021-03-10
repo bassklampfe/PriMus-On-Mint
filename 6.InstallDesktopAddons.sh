@@ -65,5 +65,51 @@ Exec=${HOME}/bin/primus2pdf.sh %F
 Icon=application-pdf
 -EOF-
 
+fi
+
+
+#--------------------------------------------------
+# install actions for nautilus
+#--------------------------------------------------
+if  [ -f /usr/bin/nautilus ]
+then
+	mkdir -p "$HOME/.local/share/file-manager/actions"
+	
+cat  << -EOF- > "${HOME}/.local/share/file-manager/actions/primus2mp3.desktop"
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Action
+ToolbarLabel=PriMus MP3
+Name=Convert PriMus to MP3
+Comment=Convert PriMus to MP3
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+Folders=*;
+Exec=${HOME}/bin/primus2mp3.sh %F
+Icon-Name=audio-mpeg
+TargetLocation=true
+MymeTypes=application/columbussoft-primus-pridoc;application/columbussoft-primus-prbdoc;application/columbussoft-primus-emildoc;application/columbussoft-primus-emixdoc;
+-EOF-
+
+cat  << -EOF- > "${HOME}/.local/share/file-manager/actions/primus2pdf.desktop"
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Action
+ToolbarLabel=PriMus PDF
+Name=Convert PriMus to PDF
+Comment=Convert PriMus to PDF
+Profiles=profile-zero;
+
+[X-Action-Profile profile-zero]
+Folders=*;
+Exec=${HOME}/bin/primus2pdf.sh %F
+Icon-Name=application-pdf
+TargetLocation=true
+MymeTypes=application/columbussoft-primus-pridoc;application/columbussoft-primus-prbdoc;application/columbussoft-primus-emildoc;application/columbussoft-primus-emixdoc;
+-EOF-
+
 
 fi

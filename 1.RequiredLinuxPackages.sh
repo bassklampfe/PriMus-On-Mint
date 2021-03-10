@@ -22,6 +22,13 @@ sudo apt install \
 	winetricks \
 	printer-driver-cups-pdf \
 	imagemagick
+	
+if  [ -f /usr/bin/nautilus ]
+then
+	sudo apt install nautilus-actions
+fi
+
+
 
 #
 # timidity-daemon is not functional, remove it now 

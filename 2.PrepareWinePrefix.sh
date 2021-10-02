@@ -10,9 +10,9 @@ rm -rf "${WINEPREFIX}"
 
 # Since microsoft is frequently moving files
 # get a fresh copy of wintricks for updated URLs
-
-wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
-chmod +x winetricks
+mkdir -p downloads
+wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O downloads/winetricks
+chmod +x downloads/winetricks
 # setup wine environment (will recreate dir)
-./winetricks --unattended corefonts lucida gdiplus vcrun2005
+downloads/winetricks --unattended corefonts lucida gdiplus vcrun2005
 

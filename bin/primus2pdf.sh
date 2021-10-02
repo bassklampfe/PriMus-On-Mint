@@ -30,10 +30,10 @@ function pri2pdf
 			prinam=$(echo -n ${pri%.pri}|iconv -f UTF-8 -t ISO-8859-14 - |perl -pe 's/[^.a-zA-Z0-9\x80-\xFF+-]/_/g;s/([\x80-\xFF])/sprintf("_%03o",ord($1))/ge;')
 			echo "prinam ='${prinam}'"
 			
-			nam1=${prinam:0:64} ; nam1=${nam1/_$/}
+			nam1=${prinam:0:64} ; nam1="$(echo -n ${nam1}| perl -pe 's/_+$//')"
 			prinam=PriMus_-_${prinam}
-			nam2=${prinam:0:64} ; nam2=${nam2/_$/}
-			echo "nam ='${nam1}'"
+			nam2=${prinam:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
+			echo "nam1='${nam1}'"
 			echo "nam2='${nam2}'"
 			
 			#

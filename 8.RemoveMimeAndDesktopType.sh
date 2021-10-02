@@ -3,6 +3,11 @@
 find ${HOME}/.local/share/applications -name "columbussoft-primus*.desktop" |
 xargs --no-run-if-empty -d '\n' xdg-desktop-menu uninstall --mode user
 
+
+DESKTOP=$(xdg-user-dir DESKTOP)
+find ${DESKTOP}/ -name columbussoft-primus.desktop -delete
+
+
 for png in $(find ${HOME}/.local/share/icons/hicolor -name "columbussoft-primus*.png") ;
 do
 	item=$(basename "${png}" .png)

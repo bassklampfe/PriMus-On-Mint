@@ -7,7 +7,7 @@
 #============================================================
 #set -x
 export WINEDEBUG=-all
-export WINEPREFIX="/home/joergen/.wine-primus"
+export WINEPREFIX="${HOME}/.wine-primus"
 
 function pri2mp3
 {

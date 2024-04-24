@@ -104,6 +104,16 @@ xdg-desktop-menu install --mode user /tmp/columbussoft-primus.desktop
 
 DESKTOP=$(xdg-user-dir DESKTOP)
 cp /tmp/columbussoft-primus.desktop ${DESKTOP}/
+
+#----------------------------------
+# simple new file template
+#----------------------------------
+TEMPLATES=$(xdg-user-dir TEMPLATES)
+cp "${WINEPREFIX}/drive_c/Program Files (x86)/PriMus/Templates/Templates/Favorites/Voice and Piano.pri" "${TEMPLATES}/PriMus.pri"
+
+#----------------------------------
+# install license if in current dir
+#----------------------------------
 if [ -f ~/license.dat ] ; then cp ~/license.dat "${WINEPREFIX}/drive_c/Program Files (x86)/PriMus/" ; fi
 
 find ~/.local -iname "*primus*"

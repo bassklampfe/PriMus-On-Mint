@@ -43,10 +43,14 @@ done
 mkdir -p ~/bin
 cat  << -EOF- > ~/bin/primus
 #!/bin/bash
-if ! pgrep timidity
+if ! pgrep fluidsynth
 then
-	zenity --error --width=320 --text "Timidity not running\nCannot start PriMus as it would freeze"
-	exit 1
+	systemctl --user start fluidsynth
+	if ! pgrep fluidsynth
+	then
+		zenity --error --width=320 --text "fluidsynth not running\nCannot start PriMus as it would freeze"
+		exit 1
+	fi
 fi
 export WINEPREFIX="${HOME}/.wine-primus"
 export WINEDLLOVERRIDES=winemenubuilder.exe=d

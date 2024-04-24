@@ -113,3 +113,27 @@ MymeTypes=application/columbussoft-primus-pridoc;application/columbussoft-primus
 
 
 fi
+
+#--------------------------------------------------
+# install actions for thunar
+#--------------------------------------------------
+if  [ -f /usr/bin/thunar ]
+then
+	if [ ! -f ]
+	then
+		echo "<actions></actions>" > ~/.config/Thunar/uca.xml
+	fi
+
+	PRIMUS_TO_PDF="<action>\n\t<icon>columbussoft-primus</icon>\n\t<name>PriMus to PDF</name>\n\t<command>${HOME}/bin/primus2pdf.sh %F</command>\n\t<description></description>\n\t<patterns>*.pri</patterns>\n\t<other-files/>\n\t<text-files/>\n</action>\n"
+	echo "PRIMUS_TO_PDF='${PRIMUS_TO_PDF}'"
+	
+	PRIMUS_TO_MP3="<action>\n\t<icon>columbussoft-primus</icon>\n\t<name>PriMus to MP3</name>\n\t<command>${HOME}/bin/primus2mp3.sh %F</command>\n\t<description></description>\n\t<patterns>*.pri</patterns>\n\t<other-files/>\n\t<text-files/>\n</action>\n"
+	echo "PRIMUS_TO_MP3='${PRIMUS_TO_MP3}'"
+
+	perl -0777 -pi~ \
+			-e 's:<action>\s*<icon>\w+-primus</icon>.*?</action>\n*::sg;' \
+		-e "s:</actions>:${PRIMUS_TO_PDF}${PRIMUS_TO_MP3}</actions>:sg;" \
+		~/.config/Thunar/uca.xml
+
+	Thunar -q
+fi

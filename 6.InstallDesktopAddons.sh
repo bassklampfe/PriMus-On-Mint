@@ -119,8 +119,9 @@ fi
 #--------------------------------------------------
 if  [ -f /usr/bin/thunar ]
 then
-	if [ ! -f ]
+	if [ ! -f ~/.config/Thunar/uca.xml ]
 	then
+		mkdir -p ~/.config/Thunar
 		echo "<actions></actions>" > ~/.config/Thunar/uca.xml
 	fi
 

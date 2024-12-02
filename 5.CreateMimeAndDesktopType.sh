@@ -92,7 +92,7 @@ cat  << -EOF- > /tmp/columbussoft-primus.desktop
 Encoding=UTF-8
 Version=1.0
 Type=Application
-MimeType=application/columbussoft-primus-pridoc;application/columbussoft-primus-prbdoc;application/columbussoft-primus-emildoc;application/columbussoft-primus-emixdoc;
+MimeType=application/columbussoft-primus-pridoc;application/columbussoft-primus-prbdoc;application/columbussoft-primus-emildoc;application/columbussoft-primus-emixdoc;audio/midi;
 Exec=${HOME}/bin/primus %F
 ##Categories=Audio;
 Terminal=false

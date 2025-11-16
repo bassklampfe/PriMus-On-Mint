@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+cd "$(dirname $(realpath "$0"))"
 bash 1.RequiredLinuxPackages.sh
 bash 2.PrepareWinePrefix.sh
 bash 3.DownloadFiles.sh

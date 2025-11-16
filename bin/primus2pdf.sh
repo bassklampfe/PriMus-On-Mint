@@ -27,20 +27,28 @@ function pri2pdf
 			#
 			# determ expected output name of PDF (depending on switch in primus)
 			#
-			prinam=$(echo -n ${real_name%.pri}|iconv -f UTF-8 -t ISO-8859-14 - |perl -pe 's/[^.a-zA-Z0-9\x80-\xFF+-]/_/g;s/([\x80-\xFF])/sprintf("_%03o",ord($1))/ge;')
-			echo "prinam ='${prinam}'"
+			prinamiso=$(echo -n ${real_name%.pri}|iconv -f UTF-8 -t ISO-8859-14 - |perl -pe 's/[^.a-zA-Z0-9\x80-\xFF+-]/_/g;s/([\x80-\xFF])/sprintf("_%03o",ord($1))/ge;')
+			echo "prinamiso ='${prinamiso}'"
+			prinamutf=$(echo -n ${real_name%.pri}|perl -pe 's/[^.a-zA-Z0-9\x80-\xFF+-]/_/g;s/([\x80-\xFF])/sprintf("_%03o",ord($1))/ge;')
+			echo "prinamutf ='${prinamutf}'"
 			
-			nam1=${prinam:0:64} ; nam1="$(echo -n ${nam1}| perl -pe 's/_+$//')"
-			prinam=PriMus_-_${prinam}
-			nam2=${prinam:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
+			nam1=${prinamiso:0:64} ; nam1="$(echo -n ${nam1}| perl -pe 's/_+$//')"
+			prinamiso=PriMus_-_${prinamiso}
+			nam2=${prinamiso:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
+			
+			nam3=${prinamutf:0:64} ; nam1="$(echo -n ${nam1}| perl -pe 's/_+$//')"
+			prinamutf=PriMus_-_${prinamutf}
+			nam4=${prinamutf:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
 			echo "nam1='${nam1}'"
 			echo "nam2='${nam2}'"
+			echo "nam3='${nam3}'"
+			echo "nam4='${nam4}'"
 			
 			#
 			# do the print
 			#
 			echo "Print '${real_name}' => '${prinam}'  => '${pdf}'"
-			rm -f "${HOME}/PDF/${nam1}"*.pdf "${HOME}/PDF/${nam2}"*.pdf
+			rm -f "${HOME}/PDF/${nam1}"*.pdf "${HOME}/PDF/${nam2}"*.pdf "${HOME}/PDF/${nam3}"*.pdf "${HOME}/PDF/${nam4}"*.pdf
 			(
 				cd "${real_dir}"
 				wine 'C:\Program Files (x86)\PriMus\PriMus.exe' -PRN "PDF" -P "${real_name}"
@@ -52,7 +60,7 @@ function pri2pdf
 			#
 			pdf=${real_path%.pri}.pdf
 			oldpdf=${real_path%.pri}-old.pdf
-			pdfpdf=$(find ${HOME}/PDF/ -name "${nam1}*.pdf" -or -name "${nam2}*.pdf")
+			pdfpdf=$(find ${HOME}/PDF/ -name "${nam1}*.pdf" -or -name "${nam2}*.pdf" -or -name "${nam3}*.pdf" -or -name "${nam4}*.pdf")
 			echo "pdfpdf='${pdfpdf}'"
 
 			#

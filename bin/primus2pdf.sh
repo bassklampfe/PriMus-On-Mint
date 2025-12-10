@@ -36,9 +36,9 @@ function pri2pdf
 			prinamiso=PriMus_-_${prinamiso}
 			nam2=${prinamiso:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
 			
-			nam3=${prinamutf:0:64} ; nam1="$(echo -n ${nam1}| perl -pe 's/_+$//')"
+			nam3=${prinamutf:0:64} ; nam3="$(echo -n ${nam3}| perl -pe 's/_+$//')"
 			prinamutf=PriMus_-_${prinamutf}
-			nam4=${prinamutf:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
+			nam4=${prinamutf:0:64} ; nam4="$(echo -n ${nam4}| perl -pe 's/_+$//')"
 			echo "nam1='${nam1}'"
 			echo "nam2='${nam2}'"
 			echo "nam3='${nam3}'"

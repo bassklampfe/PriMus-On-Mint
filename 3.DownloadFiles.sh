@@ -8,7 +8,7 @@ set -e
 mkdir -p downloads
 declare -A DOWNLOADs
 DOWNLOADs=(
-["innounp049.rar"]="https://netcologne.dl.sourceforge.net/project/innounp/innounp/innounp%200.49/innounp049.rar"
+["innounp049.rar"]="https://master.dl.sourceforge.net/project/innounp/innounp/innounp%200.49/innounp049.rar"
 ["SetupPriMus.exe"]="https://www.columbussoft.de/download/SetupPriMus.exe"
 )
 

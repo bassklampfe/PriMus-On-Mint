@@ -24,7 +24,8 @@ sudo apt install \
 	wine-stable \
 	winetricks \
 	printer-driver-cups-pdf \
-	imagemagick
+	imagemagick \
+	inotify-tools \
 	
 if  [ -f /usr/bin/nautilus ]
 then

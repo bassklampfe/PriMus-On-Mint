@@ -24,50 +24,40 @@ function pri2pdf
 			echo "real_name='${real_name}'"
 	
 			pdf=${real_path%.pri}.pdf
-			#
-			# determ expected output name of PDF (depending on switch in primus)
-			#
-			prinamiso=$(echo -n ${real_name%.pri}|iconv -f UTF-8 -t ISO-8859-14 - |perl -pe 's/[^.a-zA-Z0-9\x80-\xFF+-]/_/g;s/([\x80-\xFF])/sprintf("_%03o",ord($1))/ge;')
-			echo "prinamiso ='${prinamiso}'"
-			prinamutf=$(echo -n ${real_name%.pri}|perl -pe 's/[^.a-zA-Z0-9\x80-\xFF+-]/_/g;s/([\x80-\xFF])/sprintf("_%03o",ord($1))/ge;')
-			echo "prinamutf ='${prinamutf}'"
-			
-			nam1=${prinamiso:0:64} ; nam1="$(echo -n ${nam1}| perl -pe 's/_+$//')"
-			prinamiso=PriMus_-_${prinamiso}
-			nam2=${prinamiso:0:64} ; nam2="$(echo -n ${nam2}| perl -pe 's/_+$//')"
-			
-			nam3=${prinamutf:0:64} ; nam3="$(echo -n ${nam3}| perl -pe 's/_+$//')"
-			prinamutf=PriMus_-_${prinamutf}
-			nam4=${prinamutf:0:64} ; nam4="$(echo -n ${nam4}| perl -pe 's/_+$//')"
-			echo "nam1='${nam1}'"
-			echo "nam2='${nam2}'"
-			echo "nam3='${nam3}'"
-			echo "nam4='${nam4}'"
 			
 			#
 			# do the print
 			#
-			echo "Print '${real_name}' => '${prinam}'  => '${pdf}'"
-			rm -f "${HOME}/PDF/${nam1}"*.pdf "${HOME}/PDF/${nam2}"*.pdf "${HOME}/PDF/${nam3}"*.pdf "${HOME}/PDF/${nam4}"*.pdf
+			echo "Print '${real_name}' => '${pdf}'"
 			(
 				cd "${real_dir}"
 				wine 'C:\Program Files (x86)\PriMus\PriMus.exe' -PRN "PDF" -P "${real_name}"
+				echo "Printed status $?"
 			)
-			echo "Printed status $?"
-			sleep 1
+			
+			#
+			# wait for the printed file to appear in the PDF folder
+			#
+			set -x
+			inotifywait=$(inotifywait -e CLOSE_WRITE --format '%f' --timeout 30 "${HOME}/PDF")
+			echo "inotifywait='${inotifywait}'"
+			sleep 2
+			set +x
+
 			#
 			# wanted file names in folder of primus document
 			#
-			pdf=${real_path%.pri}.pdf
 			oldpdf=${real_path%.pri}-old.pdf
-			pdfpdf=$(find ${HOME}/PDF/ -name "${nam1}*.pdf" -or -name "${nam2}*.pdf" -or -name "${nam3}*.pdf" -or -name "${nam4}*.pdf")
-			echo "pdfpdf='${pdfpdf}'"
-
-			#
-			# rename files to targed
-			#
-			test -f "${pdf}"    && mv "${pdf}" "${oldpdf}"
-			test -f "${pdfpdf}" && mv -v "${pdfpdf}" "${pdf}"  && touch --no-create --reference "${real_path}"  "${pdf}"
+			newpdf="${HOME}/PDF/${inotifywait}"
+			echo "newpdf='${newpdf}'"
+			if [ -f "${newpdf}" ]
+			then
+				#
+				# rename files to targed
+				#
+				test -f "${pdf}"    && mv -v "${pdf}" "${oldpdf}"
+				test -f "${newpdf}" && mv -v "${newpdf}" "${pdf}" && touch --no-create --reference "${real_path}"  "${pdf}"
+			fi
 		fi
 	done
 	echo "*** ALL DONE ***"

@@ -14,5 +14,5 @@ mkdir -p downloads
 wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O downloads/winetricks
 chmod +x downloads/winetricks
 # setup wine environment (will recreate dir)
-downloads/winetricks --unattended corefonts lucida gdiplus vcrun2005
+downloads/winetricks --unattended corefonts lucida tahoma gdiplus vcrun2005
 
